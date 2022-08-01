@@ -93,6 +93,15 @@ class _PostCardState extends State<PostCard> {
                           ]
                               .map(
                                 (e) => InkWell(
+                                  onTap: () async {
+                                    if (user.uid == widget.snap['uid']) {
+                                      FirestoreMethods()
+                                          .deletePost(widget.snap['postId']);
+                                      Navigator.of(context).pop();
+                                    } else {
+                                      showSnackBar("Access Denied", context);
+                                    }
+                                  },
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 16),
